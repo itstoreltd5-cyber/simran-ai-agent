@@ -15,8 +15,15 @@ if not api_key:
 else:
     try:
         genai.configure(api_key=api_key)
-        # Updated to the current working model
-        model = genai.GenerativeModel('gemini-2.0-flash')
+        
+        # Automatically find the available working flash model
+        working_model_name = 'gemini-1.5-flash'
+        for m in genai.list_models():
+            if 'generateContent' in m.supported_generation_methods and 'flash' in m.name:
+                working_model_name = m.name
+                break
+                
+        model = genai.GenerativeModel(working_model_name)
         
         # User Input
         user_prompt = st.text_area("আপনার প্রশ্ন বা নির্দেশ লিখুন:", height=100)
