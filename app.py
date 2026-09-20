@@ -1,4 +1,3 @@
-
 import streamlit as st
 import google.generativeai as genai
 
@@ -16,7 +15,8 @@ if not api_key:
 else:
     try:
         genai.configure(api_key=api_key)
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        # Updated working model name
+        model = genai.GenerativeModel('gemini-2.5-flash')
         
         # User Input
         user_prompt = st.text_area("আপনার প্রশ্ন বা নির্দেশ লিখুন:", height=100)
